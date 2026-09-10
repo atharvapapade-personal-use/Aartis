@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+<title>गणपती आरती संग्रह | Ganpati Aarti Sangrah</title>
+<meta name="description" content="Ganpati festival aarti collection — Ganpati, Shankar and Devi aartis, in Marathi, for mobile.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================
+       HEADER  (same header markup is reused on every page —
+       only the "active" link in the side nav changes automatically)
+       ========================================================= -->
+  <header class="site-header">
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="sideNav">
+      <span></span><span></span><span></span>
+    </button>
+
+    <h1 class="site-title">आरती संग्रह<small>Aarti Sangrah</small></h1>
+
+    <span class="header-spacer" aria-hidden="true"></span>
+  </header>
+
+  <!-- Backdrop + Off-canvas side menu -->
+  <div id="navBackdrop" class="nav-backdrop"></div>
+  <aside id="sideNav" class="side-nav" aria-label="Main menu">
+    <div class="side-nav-header">
+      <div class="om">ॐ</div>
+      <p>सर्व आरत्या</p>
+    </div>
+
+    <nav>
+      <!-- 🔽 ADD A NEW LINE HERE EVERY TIME YOU ADD A NEW AARTI PAGE 🔽 -->
+      <a href="../index.html"><span class="dot"></span>मुख्यपान (Home)</a>
+      <a href="ganpati_aarti.html"><span class="dot"></span>श्री गणपती आरती</a>
+      <a href="shakar_aarti.html"><span class="dot"></span>श्री शंकर आरती</a>
+      <a href="devi_aarti.html"><span class="dot"></span>श्री देवी आरती</a>
+      <a href="datt_aarti.html"><span class="dot"></span>श्री दत्तांची आरती</a>
+      <a href="vitthal_aarti.html"><span class="dot"></span>श्री विठ्ठलाची आरती</a>
+      <a href="tukaram_aarti.html"><span class="dot"></span>श्री दत्तांची आरती</a>
+      <a href="dnyoba_aarti.html"><span class="dot"></span>श्री दत्तांची आरती</a>
+      <a href="last.html"><span class="dot"></span>श्री दत्तांची आरती</a>
+      <!-- 🔼 keep the same href you use for that page's card below 🔼 -->
+    </nav>
+
+    <!-- circular toolbar: dark/light + font size -->
+    <div class="side-nav-tools">
+      <button id="fontDecreaseBtn" class="tool-btn" aria-label="Decrease font size" title="A-">A−</button>
+      <button id="themeToggleBtn" class="tool-btn" aria-label="Toggle dark mode" title="Dark / Light mode">🌙</button>
+      <button id="fontIncreaseBtn" class="tool-btn" aria-label="Increase font size" title="A+">A+</button>
+    </div>
+  </aside>
+
+  <!-- =========================================================
+       MAIN BODY
+       ========================================================= -->
+  <main class="container">
+
+    <div class="section-divider">ॐ</div>
+
+    <!-- =====================================================
+         AARTI CARDS GRID — 2 columns, fixed-size cards.
+
+         ▶ HOW TO ADD A NEW AARTI CARD (sample template below):
+           1. Copy ONE <a class="aarti-card"> block.
+           2. Change href to "Aartis/your_new_file.html"
+           3. Replace the emoji-fallback OR swap it for a real
+              image:  <img src="images/your-photo.jpg" alt="...">
+           4. Change the text inside <span> in .label
+           5. Create Aartis/your_new_file.html (copy an existing
+              aarti page in /Aartis and edit its text) and add a
+              matching link in the side menu above.
+         No other file needs to change — styles.css already
+         gives every card the same fixed size automatically.
+         ===================================================== -->
+    <div class="aarti-grid">
+
+      <a class="aarti-card" href="Aartis/ganpati_aarti.html">
+        <div class="frame">
+          <img src="images/ganpati.png" alt="श्री गणपती">
+        </div>
+        <div class="label"><span>श्री गणपती आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/shakar_aarti.html">
+        <div class="frame">
+          <img src="images/shankar.png" alt="श्री शंकर">
+        </div>
+        <div class="label"><span>श्री शंकर आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/devi_aarti.html">
+        <div class="frame">
+          <img src="images/devi.png" alt="श्री देवी">
+        </div>
+        <div class="label"><span>श्री देवी आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/devi_aarti.html">
+        <div class="frame">
+          <img src="images/datta.png" alt="श्री देवी">
+        </div>
+        <div class="label"><span>श्री दत्तांची आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/devi_aarti.html">
+        <div class="frame">
+          <img src="images/vitthal.png" alt="श्री देवी">
+        </div>
+        <div class="label"><span>श्री विठ्ठलाची आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/devi_aarti.html">
+        <div class="frame">
+          <img src="images/tukaram.png" alt="श्री देवी">
+        </div>
+        <div class="label"><span>श्री तुकारामांची आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/devi_aarti.html">
+        <div class="frame">
+          <img src="images/dnyoba.png" alt="श्री देवी">
+        </div>
+        <div class="label"><span>श्री ज्ञानराजांची आरती</span></div>
+      </a>
+
+      <a class="aarti-card" href="Aartis/devi_aarti.html">
+        <div class="frame">
+          <img src="images/om.png" alt="श्री देवी">
+        </div>
+        <div class="label"><span>ॐ</span></div>
+      </a>
+
+      <!--
+      ▶ SAMPLE / TEMPLATE CARD — copy this block for every new aarti.
+        (Left commented out on purpose so it does not show on the page.)
+
+      <a class="aarti-card" href="Aartis/new_aarti.html">
+        <div class="frame">
+          <img src="images/new-god.jpg" alt="देवाचे नाव">
+        </div>
+        <div class="label"><span>नवीन आरतीचे नाव</span></div>
+      </a>
+      -->
+      
+    </div>
+    <div class="section-divider">ॐ</div>
+  </main>
+
+  <script src="scripts.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

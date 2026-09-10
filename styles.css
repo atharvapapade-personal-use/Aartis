@@ -1,0 +1,459 @@
+/* =========================================================
+   Ganpati Aarti Website — shared stylesheet
+   Used by index.html AND every page inside /Aartis
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@400;500;600;700&display=swap');
+
+:root{
+  /* ---- Festival palette (light / default) ---- */
+  --sindoor:        #C1440E;   /* vermilion – primary accent   */
+  --sindoor-dark:   #9A360A;
+  --marigold:       #F4A300;   /* turmeric / marigold          */
+  --maroon:         #6B1E23;   /* deep maroon – header, text   */
+  --gold:           #C9971C;   /* temple gold – borders/motifs */
+  --leaf:           #3C6E47;   /* banana-leaf green            */
+  --ivory:          #FBF3E7;   /* warm background              */
+  --card-bg:        #FFFFFF;
+  --ink:            #3A2317;   /* body text, warm near-black   */
+  --ink-soft:       #6E5B4E;
+  --shadow-color:   224, 122, 41; /* used with rgba() for warm shadows */
+
+  --font-display: 'Baloo 2', 'Noto Sans Devanagari', sans-serif;
+  --font-body:    'Mukta', 'Noto Sans Devanagari', sans-serif;
+
+  --radius-card: 22px;
+  --header-h: 64px;
+
+  --font-scale: 1; /* controlled by JS +A / -A buttons */
+}
+
+/* ---- Dark mode overrides ---- */
+:root[data-theme="dark"]{
+  --ivory:      #241713;
+  --card-bg:    #33221C;
+  --ink:        #F3E6D2;
+  --ink-soft:   #D8C3AC;
+  --maroon:     #2E1512;
+  --gold:       #E8B84B;
+  --sindoor:    #E8683A;
+  --sindoor-dark: #C1440E;
+  --marigold:   #F4A300;
+  --leaf:       #6FA97C;
+  --shadow-color: 0, 0, 0;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{
+  /* base size scales with the A+ / A- controls */
+  font-size: calc(16px * var(--font-scale));
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  transition: background .25s ease, color .25s ease;
+  padding-top: var(--header-h);
+}
+
+img{ max-width: 100%; display: block; }
+
+a{ color: inherit; text-decoration: none; }
+
+.container{
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  z-index: 100;
+  background: linear-gradient(135deg, var(--maroon), var(--sindoor-dark));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 0 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.25);
+}
+
+.hamburger-btn{
+  width: 44px; height: 44px;
+  border: none;
+  background: transparent;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.hamburger-btn span{
+  width: 24px; height: 3px;
+  background: var(--marigold);
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .25s ease;
+}
+.hamburger-btn[aria-expanded="true"] span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+.hamburger-btn[aria-expanded="true"] span:nth-child(2){ opacity: 0; }
+.hamburger-btn[aria-expanded="true"] span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
+.site-title{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #FFF3DC;
+  text-align: center;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 6px;
+}
+.site-title small{
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: .62rem;
+  letter-spacing: .04em;
+  color: var(--marigold);
+}
+
+.header-spacer{ width: 44px; flex-shrink: 0; }
+
+/* =========================================================
+   OFF-CANVAS NAV (hamburger menu)
+   ========================================================= */
+.nav-backdrop{
+  position: fixed; inset: 0;
+  background: rgba(20, 10, 6, .5);
+  opacity: 0; visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  z-index: 101;
+}
+.nav-backdrop.is-open{ opacity: 1; visibility: visible; }
+
+.side-nav{
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  width: min(78vw, 300px);
+  background: var(--ivory);
+  z-index: 102;
+  transform: translateX(-105%);
+  transition: transform .3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 18px rgba(0,0,0,.3);
+}
+.side-nav.is-open{ transform: translateX(0); }
+
+.side-nav-header{
+  background: linear-gradient(135deg, var(--maroon), var(--sindoor-dark));
+  padding: 22px 18px;
+  color: #FFF3DC;
+}
+.side-nav-header .om{
+  font-size: 1.9rem;
+  color: var(--marigold);
+  line-height: 1;
+}
+.side-nav-header p{
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.side-nav nav{
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+.side-nav nav a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink);
+  border-left: 4px solid transparent;
+}
+.side-nav nav a.active,
+.side-nav nav a:hover{
+  background: rgba(196, 68, 14, .09);
+  border-left-color: var(--sindoor);
+  color: var(--sindoor-dark);
+}
+.side-nav nav a .dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ---- toolbar: dark/light + font size, circular buttons ---- */
+.side-nav-tools{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 16px 14px 20px;
+  border-top: 1px solid rgba(140, 100, 70, .25);
+}
+.tool-btn{
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--card-bg);
+  color: var(--maroon);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease;
+}
+:root[data-theme="dark"] .tool-btn{ color: var(--gold); }
+.tool-btn:active{ transform: scale(.92); }
+.tool-btn:disabled{
+  opacity: .35;
+  cursor: not-allowed;
+}
+.tool-btn:disabled:active{ transform: none; }
+#themeToggleBtn{ font-size: 1.2rem; }
+
+/* =========================================================
+   HERO / INTRO
+   ========================================================= */
+.hero{
+  padding: 26px 0 10px;
+  text-align: center;
+}
+.hero .motif{
+  font-size: 1.6rem;
+  color: var(--gold);
+  letter-spacing: .5em;
+  margin: 0 0 6px -.5em;
+}
+.hero h1{
+  font-family: var(--font-display);
+  color: var(--sindoor-dark);
+  font-size: 1.7rem;
+  margin: 0 0 6px;
+}
+:root[data-theme="dark"] .hero h1{ color: var(--marigold); }
+.hero p{
+  color: var(--ink-soft);
+  font-size: .95rem;
+  margin: 0;
+}
+
+.section-divider{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold);
+  margin: 18px 0 16px;
+  font-size: .8rem;
+}
+.section-divider::before,
+.section-divider::after{
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 10px);
+  opacity: .6;
+}
+
+/* =========================================================
+   AARTI CARDS GRID  (2 columns, fixed size, temple-arch frame)
+   ========================================================= */
+.aarti-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding-bottom: 30px;
+}
+
+.aarti-card{
+  background: var(--card-bg);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 210px;                 /* <-- fixed card size */
+  box-shadow: 0 6px 16px rgba(var(--shadow-color), .18);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.aarti-card:active{
+  transform: scale(.97);
+  box-shadow: 0 3px 10px rgba(var(--shadow-color), .22);
+}
+
+.aarti-card .frame{
+  flex: 1;
+  margin: 10px 10px 0;
+  border-radius: 50% 50% 10px 10px;   /* temple-niche arch shape */
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--marigold), var(--sindoor));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aarti-card .frame img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.aarti-card .frame .emoji-fallback{
+  font-size: 2.6rem;
+}
+
+.aarti-card .label{
+  padding: 8px 8px 12px;
+  text-align: center;
+}
+.aarti-card .label span{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--maroon);
+}
+:root[data-theme="dark"] .aarti-card .label span{ color: var(--marigold); }
+
+/* =========================================================
+   AARTI CONTENT PAGE (individual aarti html files)
+   ========================================================= */
+.back-link{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 18px 0 4px;
+  font-weight: 600;
+  color: var(--sindoor-dark);
+  font-family: var(--font-display);
+}
+:root[data-theme="dark"] .back-link{ color: var(--marigold); }
+
+.aarti-hero-img{
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1;
+  margin: 14px auto 6px;
+  border-radius: 50% 50% 14px 14px;
+  background: linear-gradient(160deg, var(--marigold), var(--sindoor));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--gold);
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(var(--shadow-color), .25);
+}
+.aarti-hero-img img{ width: 100%; height: 100%; object-fit: cover; }
+.aarti-hero-img .emoji-fallback{ font-size: 4rem; }
+
+.aarti-page-title{
+  text-align: center;
+  font-family: var(--font-display);
+  color: var(--sindoor-dark);
+  font-size: 1.5rem;
+  margin: 4px 0 2px;
+}
+:root[data-theme="dark"] .aarti-page-title{ color: var(--marigold); }
+.aarti-page-subtitle{
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: .88rem;
+  margin: 0 0 18px;
+}
+
+.aarti-text-card{
+  background: var(--card-bg);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-card);
+  padding: 22px 20px 26px;
+  margin-bottom: 26px;
+  box-shadow: 0 6px 16px rgba(var(--shadow-color), .18);
+}
+.aarti-text-card p{
+  margin: 0 0 14px;
+  font-size: 1.08rem;
+}
+.aarti-text-card p:last-child{ margin-bottom: 0; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{
+  background: linear-gradient(135deg, var(--maroon), var(--sindoor-dark));
+  color: #F3E6D2;
+  padding: 28px 0 20px;
+  margin-top: 10px;
+}
+.site-footer .container{
+  text-align: center;
+}
+.site-footer .footer-om{
+  font-size: 1.4rem;
+  color: var(--marigold);
+  margin-bottom: 8px;
+}
+.site-footer h2{
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0 0 10px;
+  color: #FFF3DC;
+}
+.site-footer p{
+  margin: 4px 0;
+  font-size: .88rem;
+  color: #E7D3BC;
+}
+.site-footer a{
+  color: var(--marigold);
+  font-weight: 600;
+}
+.site-footer .footer-divider{
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  opacity: .6;
+  margin: 14px auto;
+}
+.site-footer .footer-note{
+  font-size: .74rem;
+  color: #C9A98B;
+  margin-top: 12px;
+}
+
+/* =========================================================
+   Small screens fine-tuning
+   ========================================================= */
+@media (max-width: 340px){
+  .aarti-card{ height: 190px; }
+  .site-title{ font-size: 1rem; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Visible keyboard focus for accessibility */
+a:focus-visible,
+button:focus-visible{
+  outline: 3px solid var(--leaf);
+  outline-offset: 2px;
+}
